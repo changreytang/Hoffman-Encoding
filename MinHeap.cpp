@@ -69,5 +69,9 @@ void MinHeap::print() {
 }
 
 Node* MinHeap::deleteMin() {
-    return NULL;
+    Node* temp = heap_array[1];
+    heap_array[1] = heap_array[size - 1];
+    delete heap_array[size - 1];
+    --size;
+    return temp;
 }
