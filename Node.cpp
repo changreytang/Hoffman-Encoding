@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "Node.h"
 
 Node::Node() {

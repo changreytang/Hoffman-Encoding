@@ -1,6 +1,8 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <cstdlib>
+
 class Node {
 private:
     char character;
@@ -15,4 +17,4 @@ public:
     int getCount();
 };
 
-#endif NODE_H
+#endif
