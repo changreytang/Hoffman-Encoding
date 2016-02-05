@@ -1,24 +1,26 @@
 #ifndef MIN_HEAP_H
 #define MIN_HEAP_H
 
-#include <stdlib>
+#include <cstdlib>
 #include "Node.h"
 
 class MinHeap {
 private:
-    Node* root;
+    Node** heap_array;
+    int size;
     
-    Node** heapifyArray(Node** array);
-    void percolateDownArray(Node** array, int index);
+    void heapify();
+    void percolateDown(int index);
+    void percolateUp(int index);
     
 public:
     MinHeap();
-    MinHeap(int* array)
+    MinHeap(int* array);
 
-    void insert(Node value, Node* root);
-    void lookupMin();
-    void deleteMin();
+    void insert(Node* n);
+    Node* deleteMin();
+    void print();
     
 };
 
-#endif MIN_HEAP_H
+#endif

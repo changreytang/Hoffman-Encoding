@@ -1,62 +1,73 @@
-#include <stdlib>
+#include <cstdlib>
+#include <iostream>
+#include "MinHeap.h"
 #include "Node.h"
+
+using namespace std;
 
 
 MinHeap::MinHeap() {
-    root = NULL;
+    heap_array = NULL;
+    size = 0;
 }
 
 MinHeap::MinHeap(int* array) {
-    int count;
-    for (int i=0; i < 27; i++) {
+    int count = 0;
+    int j = 1;
+    for (int i = 0; i < 27; i++) {
         if(array[i] != 0)
             count++;
     }
-    Node** heap_array = new Node[count];
-    for (int i=0; i < 26; i++) {
-        int j = 0;
+    size = count + 1;
+    heap_array = new Node*[size];
+    for (int i = 0; i < 26; i++) {
         if(array[i] != 0 ) {
-            char c = (char)(i+97)
+            char c = (char)(i+97);
             heap_array[j] = new Node(c, array[i]);
             j++;
         }
     }
-    heap_array = heapifyArray(heap_array, j + 1);
-    
-}
-
-Node** MinHeap::heapifyArray(Node** array, int size) {
-    
-}
-
-void MinHeap::percolateDownArray(Node** array, int index, int size) {
-    int child_index; 
-    Node* temp = array[index];
-    for( ;index*2 <= size; index = child_index) {
-        child_index = index*2
-        if(child_index != size && array[child_index + 1].getCount() < array[child_index].getCount())
-            child_index = child+1;
-        if(array[child_index] < array[index]) {
-            array[index] = array[child_count]
-            array[child_count] = temp;
-        } else
-            break;
-     }
-}
-
-void MinHeap::insert(Node value, Node* root) {
-    if (root == NULL)
-        root = value;
-    if (Node == root) {
-        
+    if (array[26] != 0) {
+        char c = ' ';
+        heap_array[size - 1] = new Node(c, array[26]);
     }
+    heapify();
+}
+
+void MinHeap::heapify() {
+    for(int i = size/2; i > 0; --i) {
+          percolateDown(i);
+    }
+}
+
+void MinHeap::percolateDown(int index) {
+    int child_index; 
+    Node* temp = heap_array[index];
+    for( ; index*2 < size; index = child_index) {
+        child_index = index*2;
+        // Check if there is a right child that is less than or equal to value of left child
+        if(child_index < (size - 1) && heap_array[child_index + 1]->getCount() <= heap_array[child_index]->getCount())
+            child_index++;
+        // Check if the child is actually less than the parent value
+        if(heap_array[child_index]->getCount() < heap_array[index]->getCount()) {
+            heap_array[index] = heap_array[child_index];
+            heap_array[child_index] = temp;
+        } else {
+            break;
+        }
+    }
+}
+
+void MinHeap::insert(Node* n) {
     
 }
 
-void MinHeap::lookupMin() {
-    
+void MinHeap::print() {
+    for(int i = 1; i < size; i++ ) {
+        cout << heap_array[i]->getCount() << " " << heap_array[i]->getCharacter() << endl;
+    }
 }
 
-void MinHeap::deleteMin() {
-    
+Node* MinHeap::deleteMin() {
+    return NULL;
 }
