@@ -7,7 +7,7 @@ BINARIES = prog2
 # tests: ${BINARIES}
 # 	   ./prog2
 
-prog2: Main.o MinHeap.o Node.o
+prog2: Main.o Encode.o MinHeap.o Node.o
 	${CXX} $^ -o $@
 
 clean:
