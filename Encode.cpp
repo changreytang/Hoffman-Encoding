@@ -46,6 +46,10 @@ void Encode::encodeCharacters(Node* root, int* arr, int index) {
     }
 }
 
+void Encode::decodeCharacters(Node* root, string code) {
+    
+}
+
 string Encode::returnCode(int* arr, int size) {
     string final = "";
     for(int i = 0; i < size; i++) {
@@ -75,4 +79,11 @@ void Encode::printCharacterEncoding() {
             cout << c << ": " << huff_codes[i] << endl;
         }
     }
+}
+
+void Encode::printHuffmanCode(char c) {
+    if(c == ' ')
+        cout << huff_codes[26];
+    else
+        cout << huff_codes[(int)(c - 97)];
 }

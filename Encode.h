@@ -22,7 +22,9 @@ public:
     void printLeaves(Node* root);
     Node* getRoot() { return this->root; }
     void encodeCharacters(Node* root, int* arr, int index);
+    void decodeCharacters(Node* root, string code);
     void printCharacterEncoding();
+    void printHuffmanCode(char c);
 
 };
 
