@@ -15,6 +15,13 @@ Node::Node(char character, int count) {
     this->right = NULL;
 }
 
+Node::Node(char character, int count, Node* left, Node* right) {
+    this->character = character;
+    this->count = count;
+    this->left = left;
+    this->right = right;
+}
+
 char Node::getCharacter() {
     return this->character;
 }
