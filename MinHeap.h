@@ -20,6 +20,8 @@ public:
     void insert(Node* n);
     Node* deleteMin();
     void print();
+    int getSize() { return this->size; }
+    Node* getRoot() { return heap_array[1]; }
     
 };
 
