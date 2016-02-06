@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <string>
 #include "Node.h"
 #include "MinHeap.h"
 #include "Encode.h"
@@ -23,6 +24,36 @@ Encode::Encode(MinHeap heap) {
     this->huff_codes = new string[27];
 }
 
+void Encode::encodeCharacters(Node* root, int* arr, int index) {
+    if(root == NULL)       
+        return;
+    if(root->getLeft()) {
+        arr[index] = 1;
+        encodeCharacters(root->getLeft(), arr, index + 1);
+    }
+    if(root->getRight()) {
+        arr[index] = 0;
+        encodeCharacters(root->getRight(), arr, index + 1);
+    }
+    if(root->getLeft() == NULL && root->getRight() == NULL) {
+        int ind = (int)(root->getCharacter() - 97);
+        if(ind < 0)
+            huff_codes[26] = returnCode(arr, index);
+        else {
+            huff_codes[ind] = returnCode(arr, index); 
+        }
+        return;
+    }
+}
+
+string Encode::returnCode(int* arr, int size) {
+    string final = "";
+    for(int i = 0; i < size; i++) {
+        final += to_string(arr[i]);
+    }
+    return final;
+}
+
 void Encode::printLeaves(Node* root) {
     if(root == NULL)       
         return;
@@ -30,4 +61,18 @@ void Encode::printLeaves(Node* root) {
         cout << root->getCount() << " " << root->getCharacter() << endl;
     printLeaves(root->getLeft()); 
     printLeaves(root->getRight());      
+}
+
+void Encode::printCharacterEncoding() {
+    for(int i = 0; i < 27; i++) {
+        if(huff_codes[i] != "") {
+            char c;
+            if(i == 26)
+                c = ' ';
+            else {
+                c = (char) (i + 97);
+            }
+            cout << c << ": " << huff_codes[i] << endl;
+        }
+    }
 }

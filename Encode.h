@@ -6,13 +6,14 @@
 #include "Node.h"
 #include "MinHeap.h"
 
+using namespace std;
+
 class Encode {
 private:
     Node* root;
     string* huff_codes;
-    string current_code = "";
     
-    void encodeCharacters(Node* root);
+    string returnCode(int* arr, int size);
     
 public:
     Encode();
@@ -20,6 +21,8 @@ public:
     
     void printLeaves(Node* root);
     Node* getRoot() { return this->root; }
+    void encodeCharacters(Node* root, int* arr, int index);
+    void printCharacterEncoding();
 
 };
 
