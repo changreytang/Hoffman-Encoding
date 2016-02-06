@@ -73,5 +73,6 @@ Node* MinHeap::deleteMin() {
     heap_array[1] = heap_array[size - 1];
     delete heap_array[size - 1];
     --size;
+    percolateDown(1);
     return temp;
 }
