@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "Node.h"
 #include "MinHeap.h"
 #include "Encode.h"
@@ -47,7 +48,18 @@ void Encode::encodeCharacters(Node* root, int* arr, int index) {
 }
 
 void Encode::decodeCharacters(Node* root, string code) {
-    
+    if(root == NULL)
+        return;
+    if(root->getLeft() == NULL && root->getRight() == NULL) {
+        cout << root->getCharacter();
+        decodeCharacters(this->root, code);
+    }
+    if(code[0] == '1') {
+        decodeCharacters(root->getLeft(), code.substr(1, code.length() - 1));
+    }
+    if(code[0] == '0') {
+        decodeCharacters(root->getRight(), code.substr(1, code.length() - 1));
+    }
 }
 
 string Encode::returnCode(int* arr, int size) {
